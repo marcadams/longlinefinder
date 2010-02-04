@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>generate_file (GenerateFile)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File generate_file.rb, line 176</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">generate_file</span>
+    <span class="ruby-identifier">open</span>(<span class="ruby-identifier">get_data_path</span>(<span class="ruby-ivar">@options</span>.<span class="ruby-identifier">output_file</span>), <span class="ruby-value str">'w'</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+      (<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-ivar">@options</span>.<span class="ruby-identifier">output_lines</span>).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">j</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">string</span> = <span class="ruby-constant">String</span>.<span class="ruby-identifier">random</span>(<span class="ruby-ivar">@options</span>.<span class="ruby-identifier">min_line_length</span>, <span class="ruby-ivar">@options</span>.<span class="ruby-identifier">max_line_length</span>)
+        <span class="ruby-identifier">f</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{j}_#{string}_#{string.length}&quot;</span> <span class="ruby-comment cmt"># Putting the line number and string length on here adds several characters to each line that aren't included in the</span>
+                                                 <span class="ruby-comment cmt"># random calculation, thus the actual line in the file could exceed the maximum character limit.</span>
+      }
+    }
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>parse (GenerateFile)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File generate_file.rb, line 120</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parse</span>(<span class="ruby-identifier">args</span>=[])
+    <span class="ruby-identifier">options</span> = <span class="ruby-constant">OpenStruct</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-identifier">options</span>.<span class="ruby-identifier">output_file</span> = <span class="ruby-identifier">get_data_path</span>(<span class="ruby-value str">&quot;largefile.txt&quot;</span>)
+    <span class="ruby-identifier">options</span>.<span class="ruby-identifier">output_lines</span> = <span class="ruby-value">10</span>
+    <span class="ruby-identifier">options</span>.<span class="ruby-identifier">min_line_length</span> = <span class="ruby-value">1</span>
+    <span class="ruby-identifier">options</span>.<span class="ruby-identifier">max_line_length</span> = <span class="ruby-value">1000</span>
+    <span class="ruby-identifier">options</span>.<span class="ruby-identifier">version</span> = <span class="ruby-value">1.0</span>
+
+    <span class="ruby-identifier">opts</span> = <span class="ruby-constant">OptionParser</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">opts</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">banner</span> = <span class="ruby-value str">&quot;Usage: generate_file.rb [options]&quot;</span>
+
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;&quot;</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;Specific options:&quot;</span> <span class="ruby-comment cmt"># Specific being options that change the output of the generator.</span>
+
+      <span class="ruby-comment cmt"># Optional argument; Sets the output file</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">&quot;-o&quot;</span>, <span class="ruby-value str">&quot;--output_file outputfile.txt&quot;</span>, <span class="ruby-node">&quot;Specify a different file name and/or location (default #{options.output_file})&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">outfile</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">options</span>.<span class="ruby-identifier">output_file</span> = <span class="ruby-identifier">outfile</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-comment cmt"># Optional argument; Sets the number of output lines</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">&quot;-l&quot;</span>, <span class="ruby-value str">&quot;--output_lines N&quot;</span>, <span class="ruby-node">&quot;The number of lines to generate (default #{options.output_lines})&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">outlines</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">options</span>.<span class="ruby-identifier">output_lines</span> = <span class="ruby-identifier">outlines</span>.<span class="ruby-identifier">to_i</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-comment cmt"># Optional argument; Sets the minimum line length</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">&quot;-m&quot;</span>, <span class="ruby-value str">&quot;--min_line_length N&quot;</span>, <span class="ruby-node">&quot;The shortest string length allowed for any given line (default #{options.min_line_length})&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">minlinelength</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">options</span>.<span class="ruby-identifier">min_line_length</span> = <span class="ruby-identifier">minlinelength</span>.<span class="ruby-identifier">to_i</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-comment cmt"># Optional argument; Sets the maximum line length</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">&quot;-M&quot;</span>, <span class="ruby-value str">&quot;--max_line_length N&quot;</span>, <span class="ruby-node">&quot;The longest string length allowed for any given line (default #{options.max_line_length})&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">maxlinelength</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">options</span>.<span class="ruby-identifier">max_line_length</span> = <span class="ruby-identifier">maxlinelength</span>.<span class="ruby-identifier">to_i</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;&quot;</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;Common options:&quot;</span> <span class="ruby-comment cmt"># Common being options that don't affect the output of the generator.</span>
+
+      <span class="ruby-comment cmt"># No argument, shows the usage help</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on_tail</span>(<span class="ruby-value str">&quot;-h&quot;</span>, <span class="ruby-value str">&quot;--help&quot;</span>, <span class="ruby-value str">&quot;Show this message&quot;</span>) <span class="ruby-keyword kw">do</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-identifier">opts</span>
+        <span class="ruby-identifier">exit</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-comment cmt"># No argument, shows the version number</span>
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on_tail</span>(<span class="ruby-value str">&quot;--version&quot;</span>, <span class="ruby-value str">&quot;Show version&quot;</span>) <span class="ruby-keyword kw">do</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">version</span>
+        <span class="ruby-identifier">exit</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">parse!</span>(<span class="ruby-identifier">args</span>)
+    <span class="ruby-ivar">@options</span> = <span class="ruby-identifier">options</span> <span class="ruby-comment cmt"># Set the options at the class level so that they can be accessed within the class.</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

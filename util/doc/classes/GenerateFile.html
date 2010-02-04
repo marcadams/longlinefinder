@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: GenerateFile</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">GenerateFile</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/generate_file_rb.html">
+                generate_file.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Object
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+Used to generate a text file of random length strings for each line
+generated.
+</p>
+<p>
+For convenience, each generated line will have the line number appended to
+the beginning of the line and the length of the line appended to the end.
+</p>
+<p>
+<b>Example</b>
+</p>
+<ul>
+<li>33_UlGddxhLEjEYOp961nMlNVqABB1KeK1QpGqecH_38 - Where 33 is the line number
+and 38 is the generated length.
+
+</li>
+</ul>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000003">generate_file</a>&nbsp;&nbsp;
+      <a href="#M000004">get_data_path</a>&nbsp;&nbsp;
+      <a href="#M000001">new</a>&nbsp;&nbsp;
+      <a href="#M000002">parse</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000001" class="method-detail">
+        <a name="M000001"></a>
+
+        <div class="method-heading">
+          <a href="GenerateFile.src/M000001.html" target="Code" class="method-signature"
+            onclick="popupCode('GenerateFile.src/M000001.html');return false;">
+          <span class="method-name">new</span><span class="method-args">(args=[])</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+<a href="GenerateFile.html">GenerateFile</a> constructor
+</p>
+<p>
+<b>Arguments</b>
+</p>
+<table>
+<tr><td valign="top">args:</td><td>Expects the ARGV array passed to the script command or an Array with the
+specific values. See <a href="GenerateFile.html#M000002">parse</a> below
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000003" class="method-detail">
+        <a name="M000003"></a>
+
+        <div class="method-heading">
+          <a href="GenerateFile.src/M000003.html" target="Code" class="method-signature"
+            onclick="popupCode('GenerateFile.src/M000003.html');return false;">
+          <span class="method-name">generate_file</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Generates the data file with random strings
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000004" class="method-detail">
+        <a name="M000004"></a>
+
+        <div class="method-heading">
+          <a href="GenerateFile.src/M000004.html" target="Code" class="method-signature"
+            onclick="popupCode('GenerateFile.src/M000004.html');return false;">
+          <span class="method-name">get_data_path</span><span class="method-args">(file_name)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gets the path to the file to create/overwrite with random generated strings
+</p>
+<p>
+<b>Arguments</b>
+</p>
+<table>
+<tr><td valign="top">file_name:</td><td>The name of the file to create without any path specifications. i.e.
+largefile.txt
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000002" class="method-detail">
+        <a name="M000002"></a>
+
+        <div class="method-heading">
+          <a href="GenerateFile.src/M000002.html" target="Code" class="method-signature"
+            onclick="popupCode('GenerateFile.src/M000002.html');return false;">
+          <span class="method-name">parse</span><span class="method-args">(args=[])</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Parses the ARGV hash and determines if any arguments were passed in to the
+calling command that affects the output of the generator.
+</p>
+<p>
+<b>Arguments</b>
+</p>
+<table>
+<tr><td valign="top">args:</td><td>Expects the ARGV array or an Array with the specific options and any values
+needed
+
+</td></tr>
+</table>
+<p>
+*Array Values* The command options when running the script are:
+</p>
+<table>
+<tr><td valign="top">-o:</td><td>(<b>output_file</b>) The file that will be written to.
+
+</td></tr>
+<tr><td valign="top">-l:</td><td>(<b>output_lines</b>) The number of lines that will be written to the
+output file.
+
+</td></tr>
+<tr><td valign="top">-m:</td><td>(<b>min_line_length</b>) The minimum length of each generated line.
+
+</td></tr>
+<tr><td valign="top">-M:</td><td>(<b>max_line_length</b>) The maximum length of each generated line.
+
+</td></tr>
+</table>
+<p>
+<b>Examples</b>
+</p>
+<ol>
+<li>[&quot;-o&quot;, &quot;/path/to/file.txt&quot;] - will set the output file
+to /path/to/file.txt.
+
+</li>
+<li>[&quot;-l&quot;, &quot;1000&quot;] - will print one thousand random lines
+in the output file.
+
+</li>
+<li>[&quot;-l&quot;, &quot;1000000&quot;, &quot;-m&quot;, &quot;5&quot;,
+&quot;-M&quot;, &quot;1000&quot;] - will print one million lines of random
+strings to the output file, the minimum length of each string will be five
+alphanumeric characters and the maximum length will be no more than one
+thousand alphanumeric characters.
+
+</li>
+</ol>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

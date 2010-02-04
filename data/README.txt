@@ -1,0 +1,1 @@
+By default the util/generate_file.rb script will create the data file here. The longlinefinder.py will look here for the default input file.
